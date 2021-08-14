@@ -13,7 +13,7 @@ public:
         x = y = 0;
     }
 
-    Vector2(float _x, float _y)
+    Vector2(const float _x, const float _y)
     {
         x = _x;
         y = _y;

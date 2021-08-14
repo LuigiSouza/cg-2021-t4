@@ -50,11 +50,23 @@
 #include "States/Menu.h"
 #include "States/GameOver.h"
 #include "Handles/Vector2.h"
+#include "Handles/Vector3.h"
 
 int screenWidth = 1024, screenHeight = 768;
 
 int GameState::total_darts = 6;
 Mouse *mouse_state;
+
+Vector3 square[8] = {
+    Vector3(0, 0, 0),
+    Vector3(0, 100, 0),
+    Vector3(100, 100, 0),
+    Vector3(100, 0, 0),
+    Vector3(0, 0, 100),
+    Vector3(0, 100, 100),
+    Vector3(100, 100, 100),
+    Vector3(100, 0, 100),
+};
 
 /***********************************************************
 *
@@ -73,9 +85,13 @@ void dispose()
 *
 ************************************************************/
 
+float clock = 0;
 void update()
 {
    mouse_state->update();
+
+   clock += 0.01;
+   clock = clock <= PI_2 ? clock : 0;
 }
 
 /***********************************************************
@@ -86,12 +102,9 @@ void update()
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
-float clock = 0;
-void render()
-{
-   CV::clear(0, 0, 0);
 
-   CV::translate(400, 300);
+void draw_2d_gear()
+{
 
    int claws = 8;
    int size_in = 40;
@@ -117,9 +130,83 @@ void render()
       }
       is_claw = !is_claw;
    }
-   clock += 0.01;
-   clock = clock <= PI_2 ? clock : 0;
    CV::circleFill(sin(clock) * size_out, cos(clock) * size_out, 4, 4);
+}
+
+void rotate_x()
+{
+   float angle = 0.01;
+   float cosseno = cos(angle);
+   float seno = sin(angle);
+
+   for (int i = 0; i < 8; i++)
+   {
+      Vector3 old_pos = Vector3(square[i]);
+      square[i].x = old_pos.x;
+      square[i].y = old_pos.y * cosseno - old_pos.z * seno;
+      square[i].z = old_pos.y * seno + old_pos.z * cosseno;
+   }
+}
+
+void rotate_z()
+{
+   float angle = 0.01;
+   float cosseno = cos(angle);
+   float seno = sin(angle);
+
+   for (int i = 0; i < 8; i++)
+   {
+      Vector3 old_pos = Vector3(square[i]);
+      square[i].x = old_pos.x * cosseno - old_pos.y * seno;
+      square[i].y = old_pos.x * seno + old_pos.y * cosseno;
+      square[i].z = old_pos.z;
+   }
+}
+
+void draw_3d_square()
+{
+   CV::line(square[0].x, square[0].y, square[1].x, square[1].y);
+   CV::line(square[1].x, square[1].y, square[2].x, square[2].y);
+   CV::line(square[2].x, square[2].y, square[3].x, square[3].y);
+   CV::line(square[3].x, square[3].y, square[0].x, square[0].y);
+
+   float vx[4] = {
+       square[0].x,
+       square[1].x,
+       square[2].x,
+       square[3].x,
+   };
+   float vy[4] = {
+       square[0].y,
+       square[1].y,
+       square[2].y,
+       square[3].y,
+   };
+   CV::color(0, 1, 0);
+   CV::polygonFill(vx, vy, 4);
+   CV::color(1, 1, 1);
+
+   CV::line(square[4].x, square[4].y, square[5].x, square[5].y);
+   CV::line(square[5].x, square[5].y, square[6].x, square[6].y);
+   CV::line(square[6].x, square[6].y, square[7].x, square[7].y);
+   CV::line(square[7].x, square[7].y, square[4].x, square[4].y);
+
+   CV::line(square[0].x, square[0].y, square[4].x, square[4].y);
+   CV::line(square[1].x, square[1].y, square[5].x, square[5].y);
+   CV::line(square[2].x, square[2].y, square[6].x, square[6].y);
+   CV::line(square[3].x, square[3].y, square[7].x, square[7].y);
+}
+
+void render()
+{
+   CV::clear(0, 0, 0);
+
+   CV::translate(400, 300);
+
+   // draw_2d_gear();
+   rotate_x();
+   rotate_z();
+   draw_3d_square();
 
    CV::translate(0, 0);
 
