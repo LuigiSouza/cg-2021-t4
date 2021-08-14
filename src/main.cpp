@@ -49,16 +49,12 @@
 #include "States/Game.h"
 #include "States/Menu.h"
 #include "States/GameOver.h"
+#include "Handles/Vector2.h"
 
 int screenWidth = 1024, screenHeight = 768;
 
 int GameState::total_darts = 6;
-
 Mouse *mouse_state;
-
-// Game State Manager
-std::map<std::string, GameState *> gsm;
-std::string current_state;
 
 /***********************************************************
 *
@@ -68,11 +64,6 @@ std::string current_state;
 
 void dispose()
 {
-   delete mouse_state;
-   delete gsm["Game"];
-   delete gsm["Menu"];
-   delete gsm["GameOver"];
-   gsm.clear();
    exit(0);
 }
 
@@ -84,20 +75,6 @@ void dispose()
 
 void update()
 {
-   gsm[current_state]->update(*mouse_state);
-   if (gsm[current_state]->get_changeState() != current_state)
-   {
-      EnumBotao difficult = gsm[current_state]->getDifficult();
-      std::list<int> points = gsm[current_state]->getPoints();
-
-      current_state = gsm[current_state]->get_changeState();
-      if (!gsm[current_state])
-         dispose();
-      if (current_state == "GameOver")
-         gsm[current_state]->setPoints(points);
-
-      gsm[current_state]->reset(difficult);
-   }
    mouse_state->update();
 }
 
@@ -109,11 +86,42 @@ void update()
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
+float clock = 0;
 void render()
 {
    CV::clear(0, 0, 0);
 
-   gsm[current_state]->render();
+   CV::translate(400, 300);
+
+   int claws = 8;
+   int size_in = 40;
+   int size_out = 60;
+   int size_claw = 60;
+   float div = 0.01;
+   bool is_claw = true;
+   for (float tmp = 0; tmp <= PI_2; tmp += PI_2 / claws / 2)
+   {
+      Vector2 p_in = Vector2(sin(tmp + clock - div), cos(tmp + clock - div));
+      CV::line(p_in.x * size_in, p_in.y * size_in, p_in.x * size_out, p_in.y * size_out);
+      if (is_claw)
+      {
+         float next_tmp = tmp + PI_2 / claws / 2;
+         for (float i = tmp; i <= next_tmp; i += div)
+            CV::circleFill(sin(i + clock) * size_out, cos(i + clock) * size_out, 1, 4);
+      }
+      else
+      {
+         float next_tmp = tmp + PI_2 / claws / 2;
+         for (float i = tmp; i <= next_tmp; i += div)
+            CV::circleFill(sin(i + clock) * size_in, cos(i + clock) * size_in, 1, 4);
+      }
+      is_claw = !is_claw;
+   }
+   clock += 0.01;
+   clock = clock <= PI_2 ? clock : 0;
+   CV::circleFill(sin(clock) * size_out, cos(clock) * size_out, 4, 4);
+
+   CV::translate(0, 0);
 
    update();
 }
@@ -155,10 +163,6 @@ int main(void)
    CV::init(&screenWidth, &screenHeight, "More Bloons");
 
    mouse_state = new Mouse();
-   gsm["Game"] = new Game(&screenWidth, &screenHeight);
-   gsm["Menu"] = new Menu(screenWidth / 3, 200, screenWidth / 4, 400);
-   gsm["GameOver"] = new GameOver(screenWidth / 3, 200, screenWidth / 4 + 20, 400);
-   current_state = "Menu";
 
    CV::run();
 }
