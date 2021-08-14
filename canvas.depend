@@ -1,0 +1,381 @@
+# depslib dependency file v1.0
+1622504781 source:c:\programs\cg_2021\src\bmp.cpp
+	"Bmp.h"
+	<string.h>
+
+1622504769 c:\programs\cg_2021\src\bmp.h
+	<stdio.h>
+	<stdlib.h>
+
+1595010925 source:c:\programs\cg_2021\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1595010872 c:\programs\cg_2021\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+
+1426372440 c:\programs\cg_2021\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 c:\programs\cg_2021\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 c:\programs\cg_2021\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1622680534 source:c:\programs\cg_2021_t1\src\bmp.cpp
+	"Bmp.h"
+	<string.h>
+
+1622504769 c:\programs\cg_2021_t1\src\bmp.h
+	<stdio.h>
+	<stdlib.h>
+
+1623611572 source:c:\programs\cg_2021_t1\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1623611111 c:\programs\cg_2021_t1\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<typeinfo>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+
+1426372440 c:\programs\cg_2021_t1\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 c:\programs\cg_2021_t1\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 c:\programs\cg_2021_t1\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1623686753 source:c:\programs\cg_2021_t1\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<list>
+	<iostream>
+	<fstream>
+	"gl_canvas2d.h"
+	"Handles/HandleMouse.hpp"
+	"Panel/Panel.hpp"
+	"Figures/Polygon_figure.h"
+	"Figures/Square_figure.h"
+	"Figures/Circle_figure.h"
+	"Figures/Triangle_figure.h"
+	"Figures/Figure.h"
+
+1622556256 c:\programs\cg_2021_t1\src\imagem.h
+
+1622557515 c:\programs\cg_2021_t1\src\handlemouse.h
+
+1622557781 source:c:\programs\cg_2021_t1\src\handlemouse.cpp
+	"HandleMouse.h"
+
+1623539028 source:c:\programs\cg_2021_t1\src\handles\handlemouse.cpp
+	"HandleMouse.hpp"
+
+1623452821 c:\programs\cg_2021_t1\src\handles\handlemouse.h
+
+1623113831 c:\programs\cg_2021_t1\src\shapes\square.h
+	"Shape.h"
+	"../gl_canvas2d.h"
+	"../Handles/Point.h"
+	<iostream>
+	<cmath>
+
+1623532935 c:\programs\cg_2021_t1\src\shapes\shape.h
+	"../gl_canvas2d.h"
+	"../Handles/Point.h"
+	"../Handles/Vector2.h"
+
+1623516217 c:\programs\cg_2021_t1\src\handles\point.h
+	<iostream>
+	"Vector2.h"
+
+1623526529 c:\programs\cg_2021_t1\src\shapes\polygon_shape.h
+	"Shape.h"
+	"../gl_canvas2d.h"
+	"../Handles/Point.h"
+	<iostream>
+	<cmath>
+
+1623529859 c:\programs\cg_2021_t1\src\shapes\square_shape.h
+	"Shape.h"
+	"../gl_canvas2d.h"
+	"../Handles/Point.h"
+	<iostream>
+	<cmath>
+
+1623611576 c:\programs\cg_2021_t1\src\handles\vector2.h
+
+1623526534 c:\programs\cg_2021_t1\src\shapes\triangle_shape.h
+	"Shape.h"
+
+1623518650 c:\programs\cg_2021_t1\src\panel\panel.h
+	"../Handles/Vector2.h"
+	"../Handles/HandleMouse.h"
+	"Botao.h"
+	"../gl_canvas2d.h"
+	<list>
+
+1623535771 c:\programs\cg_2021_t1\src\panel\botao.h
+	"../gl_canvas2d.h"
+	"../Handles/HandleMouse.h"
+
+1623527919 c:\programs\cg_2021_t1\src\shapes\circle_shape.h
+	"../gl_canvas2d.h"
+
+1623611574 c:\programs\cg_2021_t1\src\panel\panel.hpp
+	"Botao.hpp"
+	<list>
+
+1623541533 c:\programs\cg_2021_t1\src\figures\polygon_figure.h
+	"Figure.h"
+
+1623611567 c:\programs\cg_2021_t1\src\figures\figure.h
+	"../gl_canvas2d.h"
+	"../Handles/Point.hpp"
+	"../Handles/Vector2.h"
+
+1623611565 c:\programs\cg_2021_t1\src\figures\square_figure.h
+	"Figure.h"
+
+1623547547 c:\programs\cg_2021_t1\src\figures\circle_figure.h
+	"Figure.h"
+
+1623541537 c:\programs\cg_2021_t1\src\figures\triangle_figure.h
+	"Figure.h"
+
+1623611574 source:c:\programs\cg_2021_t1\src\panel\panel.cpp
+	"Panel.hpp"
+
+1623611574 c:\programs\cg_2021_t1\src\panel\botao.hpp
+	"../gl_canvas2d.h"
+	"../Handles/HandleMouse.hpp"
+	"../Handles/Vector2.h"
+	<string>
+	<iostream>
+
+1623611576 source:c:\programs\cg_2021_t1\src\panel\botao.cpp
+	"Botao.hpp"
+
+1623611579 c:\programs\cg_2021_t1\src\handles\point.hpp
+	<cmath>
+	<iostream>
+	"Vector2.h"
+
+1623548708 source:c:\programs\cg_2021_t1\src\handles\point.cpp
+	"Point.hpp"
+
+1623538620 c:\programs\cg_2021_t1\src\handles\handlemouse.hpp
+
+1623611572 source:c:\programs\cg_2021_t3\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1626794341 c:\programs\cg_2021_t3\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<typeinfo>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+
+1426372440 c:\programs\cg_2021_t3\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 c:\programs\cg_2021_t3\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 c:\programs\cg_2021_t3\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1626977047 source:c:\programs\cg_2021_t3\src\handles\handlemouse.cpp
+	"HandleMouse.h"
+
+1623538620 c:\programs\cg_2021_t3\src\handles\handlemouse.hpp
+
+1626711873 source:c:\programs\cg_2021_t3\src\handles\point.cpp
+	"Point.h"
+
+1626492240 c:\programs\cg_2021_t3\src\handles\point.hpp
+	<cmath>
+	<iostream>
+	"Vector2.h"
+
+1627055630 c:\programs\cg_2021_t3\src\handles\vector2.h
+	<cmath>
+
+1626978372 source:c:\programs\cg_2021_t3\src\panel\botao.cpp
+	"Botao.h"
+
+1626493982 c:\programs\cg_2021_t3\src\panel\botao.hpp
+	"../gl_canvas2d.h"
+	"../Handles/HandleMouse.h"
+	"../Handles/Vector2.h"
+	<string>
+	<iostream>
+
+1626976878 source:c:\programs\cg_2021_t3\src\panel\panel.cpp
+	"Panel.h"
+
+1623611574 c:\programs\cg_2021_t3\src\panel\panel.hpp
+	"Botao.hpp"
+	<list>
+
+1627523192 source:c:\programs\cg_2021_t3\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<map>
+	"gl_canvas2d.h"
+	"Handles/HandleMouse.h"
+	"States/Game.h"
+	"States/Menu.h"
+	"States/GameOver.h"
+
+1623541533 c:\programs\cg_2021_t3\src\figures\polygon_figure.h
+	"Figure.h"
+
+1623611567 c:\programs\cg_2021_t3\src\figures\figure.h
+	"../gl_canvas2d.h"
+	"../Handles/Point.hpp"
+	"../Handles/Vector2.h"
+
+1623611565 c:\programs\cg_2021_t3\src\figures\square_figure.h
+	"Figure.h"
+
+1623547547 c:\programs\cg_2021_t3\src\figures\circle_figure.h
+	"Figure.h"
+
+1623541537 c:\programs\cg_2021_t3\src\figures\triangle_figure.h
+	"Figure.h"
+
+1627082192 c:\programs\cg_2021_t3\src\entities\dart.h
+	"../Handles/HandleMouse.h"
+	"../Handles/Vector2.h"
+	"../Handles/Algebra.h"
+	"../gl_canvas2d.h"
+
+1626711875 c:\programs\cg_2021_t3\src\handles\point.h
+	<cmath>
+	<iostream>
+	"Vector2.h"
+
+1626976874 c:\programs\cg_2021_t3\src\handles\handlemouse.h
+
+1626977000 source:c:\programs\cg_2021_t3\src\entities\dart.cpp
+	"Dart.h"
+
+1626976545 c:\programs\cg_2021_t3\src\panel\panel.h
+	"Botao.h"
+	<list>
+
+1626976787 c:\programs\cg_2021_t3\src\panel\botao.h
+	"../gl_canvas2d.h"
+	"../Handles/HandleMouse.h"
+	"../Handles/Vector2.h"
+	"EnumBotao.h"
+	<string>
+	<iostream>
+
+1627082206 c:\programs\cg_2021_t3\src\entities\cannon.h
+	"Dart.h"
+	"EnumCannonState.h"
+
+1626978335 source:c:\programs\cg_2021_t3\src\entities\cannon.cpp
+	"Cannon.h"
+
+1626654390 c:\programs\cg_2021_t3\src\entities\enumstate.h
+
+1626654839 c:\programs\cg_2021_t3\src\entities\cannonstate.h
+
+1627509765 source:c:\programs\cg_2021_t3\src\handles\algebra.cpp
+	"Algebra.h"
+
+1626790054 c:\programs\cg_2021_t3\src\handles\algebra.h
+	<cmath>
+	<iostream>
+	"Vector2.h"
+
+1626963794 c:\programs\cg_2021_t3\src\entities\balloon.h
+	"../Handles/Vector2.h"
+	"../Handles/Algebra.h"
+	"../gl_canvas2d.h"
+
+1626963815 source:c:\programs\cg_2021_t3\src\entities\balloon.cpp
+	"Balloon.h"
+
+1627509765 c:\programs\cg_2021_t3\src\states\game.h
+	"GameState.h"
+	"../Entities/Cannon.h"
+	"../Entities/Balloon.h"
+	<list>
+
+1627081688 c:\programs\cg_2021_t3\src\states\gamestate.h
+	<string>
+	<list>
+	"../gl_canvas2d.h"
+	"../Handles/HandleMouse.h"
+	"../Panel/Botao.h"
+
+1626976714 source:c:\programs\cg_2021_t3\src\states\menu.cpp
+	"Menu.h"
+
+1627081698 source:c:\programs\cg_2021_t3\src\states\game.cpp
+	"Game.h"
+
+1627081853 c:\programs\cg_2021_t3\src\states\menu.h
+	"GameState.h"
+	"../Panel/Panel.h"
+
+1626797688 c:\programs\cg_2021_t3\src\entities\enumcannonstate.h
+
+1626969603 c:\programs\cg_2021_t3\src\panel\enumbotao.h
+
+1627081760 c:\programs\cg_2021_t3\src\states\gameover.h
+	"GameState.h"
+	"../Panel/Panel.h"
+
+1626976701 source:c:\programs\cg_2021_t3\src\states\gameover.cpp
+	"GameOver.h"
+
