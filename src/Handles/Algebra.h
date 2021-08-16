@@ -20,7 +20,7 @@ public:
 
    // Get angle between (x1, y1) and x axys,
    // base_x and base _y is used to normalize values to (0, 0)
-   static float getAngle(float x1, float y1, float base_x, float base_y);
+   static float getAngle(float x1, float y1, float x2, float y2, float base_x, float base_y);
 
    // Returns distance between two given points
    static float distance(float x1, float y1, float x2, float y2);
@@ -37,6 +37,9 @@ public:
 
    // Returns point q0 with quadratic bezier given three points and t
    static Vector2 quadratic_bezier(Vector2 p0, Vector2 p1, Vector2 p2, double t);
+
+   // Returns intersection point between vectors p0 to p1 and p2 to p3
+   static Vector2 *intersect_point(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3);
 };
 
 #endif
