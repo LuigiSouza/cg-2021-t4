@@ -51,6 +51,17 @@ public:
         y /= norm;
     }
 
+    Vector2 normalized()
+    {
+        float norm = (float)sqrt(x * x + y * y);
+
+        if (norm == 0.0)
+        {
+            return Vector2(1, 1);
+        }
+        return Vector2(x / norm, y / norm);
+    }
+
     Vector2 operator-(const Vector2 &v)
     {
         Vector2 aux(x - v.x, y - v.y);

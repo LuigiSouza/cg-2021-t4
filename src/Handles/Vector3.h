@@ -92,6 +92,19 @@ public:
             this->z /= norm;
         }
     }
+
+    Vector3 normalized()
+    {
+        float norm = (this->norma());
+        if (norm == 0)
+        {
+            return Vector3(1, 1, 1);
+        }
+        else
+        {
+            return Vector3(x / norm, y / norm, z / norm);
+        }
+    }
 };
 
 #endif
