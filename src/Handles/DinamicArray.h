@@ -9,17 +9,18 @@ private:
     int limit;
     int size;
 
-    void resize();
+    void resize(void);
 
 public:
     void add(T x);
     T *get(int i);
-    
-    int get_size();
-    int get_limit();
+    void clear(void);
+
+    int get_size(void);
+    int get_limit(void);
 
     DinamicArray(int size);
-    ~DinamicArray();
+    ~DinamicArray(void);
 };
 
 template <class T>
@@ -61,6 +62,16 @@ template <class T>
 int DinamicArray<T>::get_limit(void)
 {
     return limit;
+}
+
+template <class T>
+void DinamicArray<T>::clear(void)
+{
+    for (int i = 0; i < size; i++)
+    {
+        delete array[i];
+    }
+    size = 0;
 }
 
 template <class T>

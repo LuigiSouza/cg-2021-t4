@@ -47,6 +47,7 @@
 #include "Entities/Gear.h"
 
 #include "Handles/HandleMouse.h"
+#include "Handles/Algebra.h"
 #include "Handles/Vector2.h"
 #include "Handles/Vector3.h"
 
@@ -96,9 +97,9 @@ void render()
 
    CV::translate(400, 300);
    engrenagem->render();
-   engrenagem->rotate_x(0.01);
-   engrenagem->rotate_y(0.001);
-   engrenagem->rotate_z(0.05);
+   // engrenagem->rotate_x(0.01);
+   engrenagem->rotate_y(Algebra::map(mouse_state->getY(), 0, screenHeight, 0, 0.05));
+   engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenWidth, 0, 0.05));
 
    CV::translate(600, 500);
 
@@ -143,7 +144,7 @@ int main(void)
 {
    CV::init(&screenWidth, &screenHeight, "3D Gears");
 
-   engrenagem = new Gear(50, 30, 10, 60);
+   engrenagem = new Gear(400, 300, 0, 50, 30, 10, 60, true);
    mouse_state = new Mouse();
 
    CV::run();
