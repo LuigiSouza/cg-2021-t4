@@ -14,6 +14,7 @@ private:
 public:
     void add(T x);
     T *get(int i);
+    
     int get_size();
     int get_limit();
 
