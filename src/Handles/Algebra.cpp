@@ -52,6 +52,16 @@ float Algebra::distance(float x1, float y1, float x2, float y2)
    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2) * 1.0);
 }
 
+float Algebra::distance(Vector2 v1, Vector2 v2)
+{
+   return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) * 1.0);
+}
+
+float Algebra::distance(Vector3 v1, Vector3 v2)
+{
+   return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) + pow(v2.z - v1.z, 2) * 1.0);
+}
+
 float Algebra::map(float n, float start1, float stop1, float start2, float stop2)
 {
    return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;

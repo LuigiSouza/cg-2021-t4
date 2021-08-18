@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Vector2.h"
+#include "Vector3.h"
 
 // Auxiliar class to make calculus between points
 class Algebra
@@ -24,6 +25,8 @@ public:
 
    // Returns distance between two given points
    static float distance(float x1, float y1, float x2, float y2);
+   static float distance(Vector2 v1, Vector2 v2);
+   static float distance(Vector3 v1, Vector3 v2);
 
    /*
     * PNPOLY - Point Inclusion in Polygon Test

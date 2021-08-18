@@ -1,11 +1,12 @@
 #include "Panel.h"
 
-Panel::Panel(float x, float y, float width, float height)
+Panel::Panel(float x, float y, float width, float height, bool _fill)
 {
    coord_x = x;
    coord_y = y;
    this->width = width;
    this->height = height;
+   this->is_fill = _fill;
    r = g = b = 1;
 }
 
@@ -20,11 +21,11 @@ Panel::~Panel()
    buttons.clear();
 }
 
-void Panel::addButton(float _x, float _y, float _larg, float _alt, EnumBotao function, int rgb)
+void Panel::addButton(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *label)
 {
    _x += coord_x;
    _y += coord_y;
-   buttons.push_front(new Botao(_x, _y, _larg, _alt, function, rgb));
+   buttons.push_front(new Botao(_x, _y, _larg, _alt, fill, function, rgb, rgb_text, label));
 }
 
 bool Panel::insidePanel(Mouse mouse)
@@ -50,7 +51,10 @@ Botao *Panel::buttonClicked(Mouse mouse)
 void Panel::render()
 {
    CV::color(r, g, b);
-   CV::rectFill(coord_x, coord_y, coord_x + width, coord_y + height);
+   if (is_fill)
+      CV::rectFill(coord_x, coord_y, coord_x + width, coord_y + height);
+   else
+      CV::rect(coord_x, coord_y, coord_x + width, coord_y + height);
    CV::rect(coord_x, coord_y, coord_x + width, coord_y + height);
 
    for (auto it = buttons.begin(); it != buttons.end(); ++it)

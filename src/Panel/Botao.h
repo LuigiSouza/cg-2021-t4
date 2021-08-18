@@ -17,13 +17,15 @@ private:
   char label[100];
 
   float r, g, b;
+  float text_r, text_g, text_b;
 
   int elems;
+  bool is_fil;
 
   EnumBotao function;
 
 public:
-  Botao(float _x, float _y, float _larg, float _alt, EnumBotao function, int rgb);
+  Botao(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *label);
   ~Botao();
 
   void render();
@@ -45,7 +47,7 @@ public:
     return this->function;
   }
   // Sets functions of button
-  void set_function(EnumBotao function);
+  void set_function(EnumBotao function, const char *label);
 
   void set_color(float r, float g, float b)
   {
@@ -60,6 +62,16 @@ public:
     this->r = rgb[0];
     this->g = rgb[1];
     this->b = rgb[2];
+    delete rgb;
+  }
+
+  void set_color_text(int i)
+  {
+    float *rgb = CV::get_color(i);
+    this->text_r = rgb[0];
+    this->text_g = rgb[1];
+    this->text_b = rgb[2];
+    delete rgb;
   }
 };
 

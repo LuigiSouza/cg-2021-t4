@@ -45,6 +45,8 @@
 #include "gl_canvas2d.h"
 
 #include "Entities/Gear.h"
+#include "Entities/Cam.h"
+#include "States/Interface.h"
 
 #include "Handles/HandleMouse.h"
 #include "Handles/Algebra.h"
@@ -54,7 +56,7 @@
 int screenWidth = 1024, screenHeight = 768;
 
 Mouse *mouse_state;
-Gear *engrenagem;
+Interface *interface;
 
 /***********************************************************
 *
@@ -64,6 +66,8 @@ Gear *engrenagem;
 
 void dispose()
 {
+   delete interface;
+   delete mouse_state;
    exit(0);
 }
 
@@ -73,13 +77,10 @@ void dispose()
 *
 ************************************************************/
 
-float clock = 0;
 void update()
 {
    mouse_state->update();
-
-   clock += 0.01;
-   clock = clock <= PI_2 ? clock : clock - PI_2;
+   interface->update();
 }
 
 /***********************************************************
@@ -90,20 +91,41 @@ void update()
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
-
+float clockx = 0;
+float clocky = 0;
+float clockz = 0;
+float posz = 0;
 void render()
 {
    CV::clear(0, 0, 0);
 
-   CV::translate(400, 300);
-   engrenagem->render();
+   interface->render();
+
+   // // cam->set_center(Vector3(0, mouse_state->getX(), 0));
+   // if (mouse_state->isDown(0))
+   // {
+   //    clockx += 0.01;
+   //    clockx = clockx <= PI_2 ? clockx : clockx - PI_2;
+   // }
+   // if (mouse_state->isDown(1))
+   // {
+   //    clocky += 0.01;
+   //    clocky = clocky <= PI_2 ? clocky : clocky - PI_2;
+   // }
+   // if (mouse_state->isDown(2))
+   // {
+   //    clockz += 0.01;
+   //    clockz = clockz <= PI_2 ? clockz : clockz - PI_2;
+   // }
+   // engrenagem->rotate_z(clockz);
+   // engrenagem->rotate_x(clockx);
+   // engrenagem->rotate_y(clocky);
+   // // engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenHeight, 0, PI));
+   // // engrenagem->rotate_x(Algebra::map(mouse_state->getY(), 0, screenHeight, 0, PI));
+   // // engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenWidth, 0, PI_div_4));
+   // engrenagem->matrix_view(*cam);
+   // engrenagem->render();
    // engrenagem->rotate_x(0.01);
-   engrenagem->rotate_y(Algebra::map(mouse_state->getY(), 0, screenHeight, 0, 0.05));
-   engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenWidth, 0, 0.05));
-
-   CV::translate(600, 500);
-
-   CV::translate(0, 0);
 
    update();
 }
@@ -111,16 +133,10 @@ void render()
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key)
 {
-   bool fecha = true;
-   switch (key)
-   {
-   case 27: // finaliza programa após clicar duas vezes
-      if (fecha)
-      {
-         dispose();
-      }
-      break;
-   }
+   bool exit = interface->keyboard(key);
+
+   if (exit)
+      dispose();
 }
 
 //funcao chamada toda vez que uma tecla for liberada
@@ -144,8 +160,8 @@ int main(void)
 {
    CV::init(&screenWidth, &screenHeight, "3D Gears");
 
-   engrenagem = new Gear(400, 300, 0, 50, 30, 10, 60, true);
    mouse_state = new Mouse();
+   interface = new Interface(&screenWidth, &screenHeight, mouse_state);
 
    CV::run();
 }

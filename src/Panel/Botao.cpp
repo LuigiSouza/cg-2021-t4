@@ -1,14 +1,16 @@
 #include "Botao.h"
 
-Botao::Botao(float _x, float _y, float _larg, float _alt, EnumBotao function, int rgb)
+Botao::Botao(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *_label)
 {
    altura = _alt;
    largura = _larg;
    x = _x;
    y = _y;
+   this->is_fil = fill;
    this->function = function;
    set_color(rgb);
-   set_function(function);
+   set_color_text(rgb_text);
+   set_function(function, _label);
 }
 
 Botao::~Botao()
@@ -18,8 +20,11 @@ Botao::~Botao()
 void Botao::render()
 {
    CV::color(r, g, b);
-   CV::rectFill(x, y, x + largura, y + altura);
-   CV::color(0, 0, 0);
+   if (!is_fil)
+      CV::rect(x, y, x + largura, y + altura);
+   else if (function != EnumBotao::Text)
+      CV::rectFill(x, y, x + largura, y + altura);
+   CV::color(text_r, text_g, text_b);
    CV::text(x + 5, y + altura / 2, label); //escreve o label do botao mais ou menos ao centro.
 }
 
@@ -32,28 +37,16 @@ bool Botao::isInside(Mouse mouse_state)
    return false;
 }
 
-void Botao::set_function(EnumBotao function)
+void Botao::set_function(EnumBotao function, const char *_label)
 {
    switch (function)
    {
-   case EnumBotao::Jogar:
-      sprintf(label, "Jogar");
+   case EnumBotao::Text:
+      sprintf(label, _label);
       this->function = function;
       break;
-   case EnumBotao::Facil:
-      sprintf(label, "Facil");
-      this->function = function;
-      break;
-   case EnumBotao::Dificil:
-      sprintf(label, "Dificil");
-      this->function = function;
-      break;
-   case EnumBotao::Menu:
-      sprintf(label, "Menu");
-      this->function = function;
-      break;
-   case EnumBotao::Sair:
-      sprintf(label, "Sair");
+   case EnumBotao::Other:
+      sprintf(label, _label);
       this->function = function;
       break;
    default:

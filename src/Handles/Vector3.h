@@ -71,6 +71,20 @@ public:
         return (aux);
     }
 
+    Vector3 operator^(const Vector3 v)
+    {
+        Vector3 aux(y * v.z - z * v.y,
+                    z * v.x - x * v.z,
+                    x * v.y - y * v.x);
+        return (aux);
+    }
+
+    Vector3 operator/(const Vector3 v)
+    {
+        Vector3 aux = Vector3(x / v.x, y / v.y, z / v.z);
+        return (aux);
+    }
+
     float norma()
     {
         return (float)(sqrt(x * x + y * y + z * z));
