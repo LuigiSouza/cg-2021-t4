@@ -12,10 +12,13 @@ private:
     Vector3 normal;
 
     float angle;
-    float projection = 300;
+    float projection = 600;
     bool ortho;
 
 public:
+    bool get_ortho(void) { return ortho; }
+    void set_ortho(bool i) { this->ortho = i; }
+
     Vector3 get_pos(void);
     Vector3 get_head(void);
     Vector3 get_direction(void);
@@ -27,6 +30,11 @@ public:
     void set_center_x(float _x);
     void set_center_y(float _y);
     void set_center_z(float _z);
+
+    void set_direction(Vector3 _c);
+    void set_direction_x(float _x);
+    void set_direction_y(float _y);
+    void set_direction_z(float _z);
 
     void set_angle(float _angle);
 

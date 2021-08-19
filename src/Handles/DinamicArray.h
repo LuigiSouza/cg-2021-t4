@@ -67,10 +67,6 @@ int DinamicArray<T>::get_limit(void)
 template <class T>
 void DinamicArray<T>::clear(void)
 {
-    for (int i = 0; i < size; i++)
-    {
-        delete array[i];
-    }
     size = 0;
 }
 

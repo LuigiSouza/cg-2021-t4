@@ -42,10 +42,25 @@ void Botao::set_function(EnumBotao function, const char *_label)
    switch (function)
    {
    case EnumBotao::Text:
-      sprintf(label, _label);
-      this->function = function;
-      break;
    case EnumBotao::Other:
+   case EnumBotao::minRadius:
+   case EnumBotao::maxRadius:
+   case EnumBotao::minTooth:
+   case EnumBotao::maxTooth:
+   case EnumBotao::minSizeTooth:
+   case EnumBotao::maxSizeTooth:
+   case EnumBotao::minThick:
+   case EnumBotao::maxThick:
+   case EnumBotao::minCrownSize:
+   case EnumBotao::maxCrownSize:
+   case EnumBotao::minSpeed:
+   case EnumBotao::maxSpeed:
+   case EnumBotao::camStyle:
+   case EnumBotao::toothType:
+   case EnumBotao::minInGap:
+   case EnumBotao::maxInGap:
+   case EnumBotao::minOutGap:
+   case EnumBotao::maxOutGap:
       sprintf(label, _label);
       this->function = function;
       break;

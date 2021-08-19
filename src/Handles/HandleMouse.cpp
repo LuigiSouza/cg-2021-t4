@@ -1,6 +1,8 @@
 
 #include "HandleMouse.h"
 
+#include <iostream>
+
 Mouse::Mouse(void)
 {
    for (int i = 0; i < 3; i++)
@@ -8,8 +10,6 @@ Mouse::Mouse(void)
       prev_button[i] = false;
       button[i] = false;
    }
-   this->prev_pos_x = this->pos_x = 0;
-   this->prev_pos_y = this->pos_y = 0;
 }
 
 Mouse::~Mouse(void)
@@ -22,6 +22,9 @@ void Mouse::update(void)
    {
       this->prev_button[i] = this->button[i];
    }
+
+   this->prev_pos_x = this->pos_x;
+   this->prev_pos_y = this->pos_y;
 }
 
 void Mouse::setPress(int index)
@@ -49,11 +52,13 @@ void Mouse::setX(float x)
 {
    this->prev_pos_x = this->pos_x;
    this->pos_x = x;
+   this->updated = true;
 }
 void Mouse::setY(float y)
 {
    this->prev_pos_y = this->pos_y;
    this->pos_y = y;
+   this->updated = true;
 }
 float Mouse::getX(void) { return this->pos_x; }
 float Mouse::getY(void) { return this->pos_y; }

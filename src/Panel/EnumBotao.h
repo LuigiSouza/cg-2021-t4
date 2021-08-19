@@ -1,5 +1,23 @@
 enum class EnumBotao
 {
     Text,
-    Other
+    Other,
+    minRadius,
+    maxRadius,
+    minTooth,
+    maxTooth,
+    minSizeTooth,
+    maxSizeTooth,
+    minThick,
+    maxThick,
+    minCrownSize,
+    maxCrownSize,
+    minSpeed,
+    maxSpeed,
+    minInGap,
+    maxInGap,
+    minOutGap,
+    maxOutGap,
+    camStyle,
+    toothType
 };

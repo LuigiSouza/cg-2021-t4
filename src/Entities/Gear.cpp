@@ -1,5 +1,43 @@
 #include "Gear.h"
 
+void Gear::set_radius(float _rad)
+{
+    this->radius_in = _rad;
+    this->radius_out = radius_in + crown_size;
+    this->radius_tooth = radius_out + size_tooth;
+}
+void Gear::set_tooths(int _num)
+{
+    this->tooths = _num;
+}
+void Gear::set_size_tooth(float size)
+{
+    this->size_tooth = size;
+    this->radius_tooth = radius_out + size_tooth;
+}
+void Gear::set_thickness(float thick)
+{
+    this->thickness = thick;
+}
+void Gear::set_crown_size(float size)
+{
+    this->crown_size = size;
+    this->radius_out = radius_in + crown_size;
+    this->radius_tooth = radius_out + size_tooth;
+}
+void Gear::set_type(bool flat)
+{
+    this->is_flat = flat;
+}
+void Gear::set_in_gap(float gap)
+{
+    this->size_gear_in = gap;
+}
+void Gear::set_out_gap(float gap)
+{
+    this->size_gear_out = gap;
+}
+
 void Gear::matrix_view(Cam cam)
 {
     Vector3 c = cam.get_pos();
@@ -15,20 +53,33 @@ void Gear::matrix_view(Cam cam)
         Vector3 *pnt_render = vertices_draw->get(i);
         Vector3 pnt = *render_by->get(i);
         pnt.z += posz;
-        pnt_render->x = pnt.x * n.x + pnt.y * n.y + pnt.z * n.z - (n.x * c.x + n.y * c.y + n.z * c.z);
-        pnt_render->y = pnt.x * h.x + pnt.y * h.y + pnt.z * h.z - (h.x * c.x + h.y * c.y + h.z * c.z);
-        pnt_render->z = pnt.x * d.x + pnt.y * d.y + pnt.z * d.z - (d.x * c.x + d.y * c.y + d.z * c.z);
-        pnt_render->x = (pnt_render->x - c.x) * (projection / pnt_render->z) + pnt_render->x;
-        pnt_render->y = (pnt_render->y - c.y) * (projection / pnt_render->z) + pnt_render->y;
+        if (!cam.get_ortho())
+        {
+            pnt_render->x = pnt.x * n.x + pnt.y * n.y + pnt.z * n.z - (n.x * c.x + n.y * c.y + n.z * c.z);
+            pnt_render->y = pnt.x * h.x + pnt.y * h.y + pnt.z * h.z - (h.x * c.x + h.y * c.y + h.z * c.z);
+            pnt_render->z = pnt.x * d.x + pnt.y * d.y + pnt.z * d.z - (d.x * c.x + d.y * c.y + d.z * c.z);
+            pnt_render->x = (pnt_render->x - c.x) * (projection / pnt_render->z) + pnt_render->x;
+            pnt_render->y = (pnt_render->y - c.y) * (projection / pnt_render->z) + pnt_render->y;
+        }
+        else
+        {
+            pnt_render->x = pnt.x;
+            pnt_render->y = pnt.y;
+        }
     }
 }
 
 void Gear::create_gear(void)
 {
+    vertices->clear();
+    vertices_draw->clear();
+
+    float error = 0.0001;
+
     float increment = PI_2 / tooths * 0.5;
     double arc_out = increment * size_gear_out;
     double arc_in = increment * size_gear_in;
-    double div_in = (arc_in + arc_in) / DIV;
+    double div_in = (arc_in + arc_in) / (double)DIV_IN;
 
     double distance_tooths = Algebra::distance(
         sin(-arc_out) * radius_tooth,
@@ -37,7 +88,7 @@ void Gear::create_gear(void)
         cos(arc_out) * radius_tooth);
 
     bool is_tooth = true;
-    for (float tmp = 0; tmp <= PI_2; tmp += increment)
+    for (double tmp = 0; tmp < PI_2 - error; tmp += increment)
     {
         if (is_tooth)
         {
@@ -64,7 +115,7 @@ void Gear::create_gear(void)
                     double angle = Algebra::getAngle(rad_2.x, rad_2.y, rad_1.x, rad_1.y, intersect->x, intersect->y);
                     double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_1.x, rad_1.y, intersect->x, intersect->y);
 
-                    for (double i = 0; i <= angle; i += angle / 4.0)
+                    for (double i = 0; i <= angle; i += angle / DIV_TOOTH)
                     {
                         vertices->add(Vector3(sin(i - angle_begin) * distance + intersect->x, cos(i - angle_begin) * distance + intersect->y, -thickness / 2.0));
                     }
@@ -78,7 +129,7 @@ void Gear::create_gear(void)
                     double angle = PI;
                     double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_1.x, rad_1.y, intersect->x, intersect->y);
 
-                    for (double i = 0; i <= angle; i += angle / 4.0)
+                    for (double i = 0; i <= angle; i += angle / DIV_TOOTH)
                     {
                         vertices->add(Vector3(sin(i - angle_begin) * distance + intersect->x, cos(i - angle_begin) * distance + intersect->y, -thickness / 2.0));
                     }
@@ -87,7 +138,7 @@ void Gear::create_gear(void)
         }
         else
         {
-            for (double i = tmp - arc_in; i <= tmp + arc_in; i += div_in)
+            for (double i = tmp - arc_in; i <= tmp + arc_in + error; i += div_in)
             {
                 vertices->add(Vector3(sin(i) * radius_out, cos(i) * radius_out, -thickness / 2.0));
             }
@@ -102,23 +153,27 @@ void Gear::create_gear(void)
         vertices->add(Vector3(other_side));
     }
     double div = PI_2 / tooths;
-    for (double i = 0; i <= PI_2; i += div)
+    for (double i = 0; i < PI_2 - error; i += div)
+    {
         vertices->add(Vector3(sin(i) * radius_in, cos(i) * radius_in, -thickness / 2.0));
-    for (double i = 0; i <= PI_2; i += div)
+    }
+    for (double i = 0; i < PI_2 - error; i += div)
+    {
         vertices->add(Vector3(sin(i) * radius_in, cos(i) * radius_in, thickness / 2.0));
+    }
     for (int i = 0; i < vertices->get_size(); i++)
         vertices_draw->add(*vertices->get(i));
 }
 
 void Gear::render(void)
 {
+    CV::color(1, 1, 1);
     CV::translate(posx, posy);
 
     Vector3 *prev = vertices_draw->get(0);
     Vector3 *next;
     Vector3 *prev_z;
 
-    CV::color(1, 0, 0);
     // Connect front vertices with with themselves
     for (int i = 1; i < num_vertices; i++)
     {
@@ -128,7 +183,6 @@ void Gear::render(void)
     }
     next = vertices_draw->get(0);
     CV::line(prev->x, prev->y, next->x, next->y);
-    CV::color(1, 1, 1);
 
     // Connect back vertices with with themselves and with front vertices
     prev = vertices_draw->get(num_vertices);
@@ -180,6 +234,7 @@ void Gear::render(void)
     CV::line(prev->x, prev->y, next->x, next->y);
 
     rendered = true;
+    CV::translate(0, 0);
 }
 
 void Gear::rotate_x(float angle)

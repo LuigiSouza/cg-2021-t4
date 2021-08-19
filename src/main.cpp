@@ -79,8 +79,8 @@ void dispose()
 
 void update()
 {
-   mouse_state->update();
    interface->update();
+   mouse_state->update();
 }
 
 /***********************************************************
@@ -91,43 +91,13 @@ void update()
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
-float clockx = 0;
-float clocky = 0;
-float clockz = 0;
-float posz = 0;
 void render()
 {
    CV::clear(0, 0, 0);
 
-   interface->render();
-
-   // // cam->set_center(Vector3(0, mouse_state->getX(), 0));
-   // if (mouse_state->isDown(0))
-   // {
-   //    clockx += 0.01;
-   //    clockx = clockx <= PI_2 ? clockx : clockx - PI_2;
-   // }
-   // if (mouse_state->isDown(1))
-   // {
-   //    clocky += 0.01;
-   //    clocky = clocky <= PI_2 ? clocky : clocky - PI_2;
-   // }
-   // if (mouse_state->isDown(2))
-   // {
-   //    clockz += 0.01;
-   //    clockz = clockz <= PI_2 ? clockz : clockz - PI_2;
-   // }
-   // engrenagem->rotate_z(clockz);
-   // engrenagem->rotate_x(clockx);
-   // engrenagem->rotate_y(clocky);
-   // // engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenHeight, 0, PI));
-   // // engrenagem->rotate_x(Algebra::map(mouse_state->getY(), 0, screenHeight, 0, PI));
-   // // engrenagem->rotate_z(Algebra::map(mouse_state->getX(), 0, screenWidth, 0, PI_div_4));
-   // engrenagem->matrix_view(*cam);
-   // engrenagem->render();
-   // engrenagem->rotate_x(0.01);
-
    update();
+
+   interface->render();
 }
 
 //funcao chamada toda vez que uma tecla for pressionada
