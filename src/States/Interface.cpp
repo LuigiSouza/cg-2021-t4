@@ -186,11 +186,25 @@ bool Interface::keyboard(int key)
             cam->set_direction_x(direction_x);
         }
         break;
+    case 102: // f
+        if (direction_y > -0.06)
+        {
+            direction_y -= 0.005;
+            cam->set_direction_y(direction_y);
+        }
+        break;
     case 113: // q
         if (direction_x > -0.06)
         {
             direction_x -= 0.005;
             cam->set_direction_x(direction_x);
+        }
+        break;
+    case 114: // r
+        if (direction_y < 0.06)
+        {
+            direction_y += 0.005;
+            cam->set_direction_y(direction_y);
         }
         break;
     case 115: // s
