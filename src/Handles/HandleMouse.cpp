@@ -52,13 +52,11 @@ void Mouse::setX(float x)
 {
    this->prev_pos_x = this->pos_x;
    this->pos_x = x;
-   this->updated = true;
 }
 void Mouse::setY(float y)
 {
    this->prev_pos_y = this->pos_y;
    this->pos_y = y;
-   this->updated = true;
 }
 float Mouse::getX(void) { return this->pos_x; }
 float Mouse::getY(void) { return this->pos_y; }

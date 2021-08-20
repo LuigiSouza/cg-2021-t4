@@ -10,7 +10,7 @@
 #include "../gl_canvas2d.h"
 #include "Cam.h"
 
-#define DIV_IN 1
+#define DIV_IN 4
 #define DIV_TOOTH 4
 #define DEFAULT_VALUE 10
 

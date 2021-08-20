@@ -15,7 +15,6 @@ private:
     float prev_pos_y;
 
     bool ctrl = false;
-    bool updated = false;
 
 public:
     Mouse(void);

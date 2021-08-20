@@ -42,11 +42,11 @@ private:
 
     float cam_x = 0;
     float cam_y = 0;
-    float cam_z = -200;
+    float cam_z = 1000;
 
     float direction_x = 0;
     float direction_y = 0;
-    float direction_z = 10;
+    float direction_z = -10;
 
     void handle_mouse(void);
 

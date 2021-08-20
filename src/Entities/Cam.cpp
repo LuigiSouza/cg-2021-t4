@@ -54,11 +54,6 @@ void Cam::set_angle(float _angle)
     this->normal = head ^ direction;
 }
 
-float Cam::get_projection(void)
-{
-    return this->projection;
-}
-
 Vector3 Cam::get_pos(void)
 {
     return Vector3(this->center);

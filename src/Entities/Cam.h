@@ -12,7 +12,6 @@ private:
     Vector3 normal;
 
     float angle;
-    float projection = 600;
     bool ortho;
 
 public:
@@ -23,8 +22,6 @@ public:
     Vector3 get_head(void);
     Vector3 get_direction(void);
     Vector3 get_normal(void);
-
-    float get_projection(void);
 
     void set_center(Vector3 _c);
     void set_center_x(float _x);

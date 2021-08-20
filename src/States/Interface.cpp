@@ -163,77 +163,59 @@ void Interface::update(void)
 
 bool Interface::keyboard(int key)
 {
+    // std::cout << "key: " << key << std::endl;
+
     switch (key)
     {
     case 97: // a
-        if (cam_x > -45)
+        if (direction_x > -0.09)
         {
-            cam_x -= 5;
-            cam->set_center_x(cam_x);
+            direction_x -= 0.005;
+            cam->set_direction_x(direction_x);
         }
         break;
     case 100: // d
-        if (cam_x < 65)
-        {
-            cam_x += 5;
-            cam->set_center_x(cam_x);
-        }
-        break;
-    case 101: // e
-        if (direction_x < 0.06)
+        if (direction_x < 0.11)
         {
             direction_x += 0.005;
             cam->set_direction_x(direction_x);
         }
         break;
+    case 101: // e
+        break;
     case 102: // f
-        if (direction_y > -0.06)
+        if (direction_y > -0.12)
         {
             direction_y -= 0.005;
             cam->set_direction_y(direction_y);
         }
         break;
     case 113: // q
-        if (direction_x > -0.06)
-        {
-            direction_x -= 0.005;
-            cam->set_direction_x(direction_x);
-        }
         break;
     case 114: // r
-        if (direction_y < 0.06)
+        if (direction_y < 0.11)
         {
             direction_y += 0.005;
             cam->set_direction_y(direction_y);
         }
         break;
     case 115: // s
-        if (cam_z > -1000)
-        {
-            cam_z -= 10;
-            cam->set_center_z(cam_z);
-        }
-        break;
-    case 119: // w
-        if (cam_z < 270)
+        if (cam_z < 1250)
         {
             cam_z += 10;
             cam->set_center_z(cam_z);
         }
         break;
-    case 120: // x
-        if (cam_y < 80)
+    case 119: // w
+        if (cam_z > 1050)
         {
-            cam_y += 5;
-            cam->set_center_y(cam_y);
+            cam_z -= 10;
+            cam->set_center_z(cam_z);
         }
         break;
+    case 120: // x
+        break;
     case 122: // z
-        if (cam_y > -100)
-        {
-            cam_y -= 5;
-            cam->set_center_y(cam_y);
-        }
         break;
     case 27: // finaliza programa após clicar duas vezes
         return true;
