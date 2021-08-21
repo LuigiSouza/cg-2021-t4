@@ -42,7 +42,7 @@ private:
 
     float cam_x = 0;
     float cam_y = 0;
-    float cam_z = 1000;
+    float cam_z = 1150;
 
     float direction_x = 0;
     float direction_y = 0;
