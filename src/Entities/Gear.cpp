@@ -44,6 +44,7 @@ void Gear::matrix_view(Cam cam)
     Vector3 h = cam.get_head();
     Vector3 d = cam.get_direction();
     Vector3 n = cam.get_normal();
+    float projection = cam.get_projection();
     DinamicArray<Vector3> *render_by = rendered ? this->vertices : this->vertices_draw;
     rendered = false;
 
@@ -55,11 +56,10 @@ void Gear::matrix_view(Cam cam)
         pnt_render->x = pnt.x * n.x + pnt.y * n.y + pnt.z * n.z - (n.x * c.x + n.y * c.y + n.z * c.z);
         pnt_render->y = pnt.x * h.x + pnt.y * h.y + pnt.z * h.z - (h.x * c.x + h.y * c.y + h.z * c.z);
         pnt_render->z = pnt.x * d.x + pnt.y * d.y + pnt.z * d.z - (d.x * c.x + d.y * c.y + d.z * c.z);
-        float projection = pnt_render->z - c.z;
         if (!cam.get_ortho())
         {
-            pnt_render->x = (pnt_render->x - c.x) * (projection / pnt_render->z) + pnt_render->x;
-            pnt_render->y = (pnt_render->y - c.y) * (projection / pnt_render->z) + pnt_render->y;
+            pnt_render->x = pnt_render->x * ((projection / pnt_render->z));
+            pnt_render->y = pnt_render->y * ((projection / pnt_render->z));
         }
     }
 }

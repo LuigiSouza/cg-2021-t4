@@ -39,7 +39,7 @@ void Interface::handle_mouse(void)
                 }
                 break;
             case EnumBotao::minTooth:
-                if (tooths_num > 4)
+                if (tooths_num > 5)
                 {
                     gear->set_tooths(--tooths_num);
                 }
@@ -182,6 +182,11 @@ bool Interface::keyboard(int key)
         }
         break;
     case 101: // e
+        if (cam_angle < PI_div_2)
+        {
+            cam_angle += PI / 20;
+            cam->set_angle(cam_angle);
+        }
         break;
     case 102: // f
         if (direction_y > -0.12)
@@ -191,6 +196,11 @@ bool Interface::keyboard(int key)
         }
         break;
     case 113: // q
+        if (cam_angle > -PI_div_2)
+        {
+            cam_angle -= PI / 20;
+            cam->set_angle(cam_angle);
+        }
         break;
     case 114: // r
         if (direction_y < 0.11)
@@ -200,14 +210,14 @@ bool Interface::keyboard(int key)
         }
         break;
     case 115: // s
-        if (cam_z < 1250)
+        if (cam_z < -50)
         {
             cam_z += 10;
             cam->set_center_z(cam_z);
         }
         break;
     case 119: // w
-        if (cam_z > 1050)
+        if (cam_z > -150)
         {
             cam_z -= 10;
             cam->set_center_z(cam_z);

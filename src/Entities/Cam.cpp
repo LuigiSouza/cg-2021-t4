@@ -73,3 +73,8 @@ Vector3 Cam::get_normal(void)
 {
     return Vector3(this->normal);
 }
+
+float Cam::get_projection(void)
+{
+    return this->projection;
+}

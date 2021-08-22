@@ -40,13 +40,14 @@ private:
     bool is_ortho = false;
     bool is_flat = true;
 
+    float cam_angle = 0.0;
     float cam_x = 0;
     float cam_y = 0;
-    float cam_z = 1150;
+    float cam_z = 0;
 
     float direction_x = 0;
     float direction_y = 0;
-    float direction_z = -10;
+    float direction_z = 10;
 
     void handle_mouse(void);
 
@@ -65,8 +66,8 @@ Interface::Interface(int *scr_w, int *scr_h, Mouse *_mouse)
     this->screenHeight = scr_h;
     this->mouse = _mouse;
 
-    this->cam = new Cam(Vector3(cam_x, cam_y, cam_z), Vector3(direction_x, direction_y, direction_z), 0.0, is_ortho);
-    this->gear = new Gear(Vector3(375, 375, 800), radius, crown_size, tooths_num, size_tooth, thickness, is_flat, in_gap, out_gap);
+    this->cam = new Cam(Vector3(cam_x, cam_y, cam_z), Vector3(direction_x, direction_y, direction_z), cam_angle, is_ortho);
+    this->gear = new Gear(Vector3(375, 375, 200), radius, crown_size, tooths_num, size_tooth, thickness, is_flat, in_gap, out_gap);
 
     this->panel = new Panel(*screenWidth - 300, 0, 300, *screenHeight, true);
     panel->color(0.5, 0.5, 0.5);
