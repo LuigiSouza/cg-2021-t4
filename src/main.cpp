@@ -19,18 +19,19 @@
  *
  * Funções básicas implementadas:
  *
-- Classes em C++ para definição de vetores e transformações geométricas
-- Sistema do controle do canhão
-- Sistema de movimentação do projétil. De preferência utilize o mouse para isso.
-- Colisão do projétil com os alvos (círculos)
-- Controle da direção do canhão
-- Controle da força de disparo
+- Modelagem de engrenagem tipo spur gear
+- Animação (rotação)
+- Visualização ortográfica e perspectiva (sob vários ângulos) em wireframe
+- Parametrização do número de dentes e raios
 
 /------------------------------------------------------------------------
  *
  * Funções extras implementadas:
  *
-- Sistemas de GameStates
+- Engrenagem tipo spur gear com lado plano e curvo
+- Edição livre de todos os parâmetros utilizados na engrenagem
+- Interface para edição da engrenagem
+- Rotação em diferentes ângulos com o mouse
 
 ************************************************************************/
 
@@ -103,9 +104,7 @@ void render()
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key)
 {
-   bool exit = interface->keyboard(key);
-
-   if (exit)
+   if (interface->keyboard(key))
       dispose();
 }
 
