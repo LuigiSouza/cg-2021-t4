@@ -25,8 +25,8 @@ private:
   EnumBotao function;
 
 public:
-  Botao(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *label);
-  ~Botao();
+  inline Botao(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *label);
+  inline ~Botao();
 
   void render();
 
@@ -74,5 +74,22 @@ public:
     delete rgb;
   }
 };
+
+Botao::Botao(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *_label)
+{
+  altura = _alt;
+  largura = _larg;
+  x = _x;
+  y = _y;
+  this->is_fil = fill;
+  this->function = function;
+  set_color(rgb);
+  set_color_text(rgb_text);
+  set_function(function, _label);
+}
+
+Botao::~Botao()
+{
+}
 
 #endif

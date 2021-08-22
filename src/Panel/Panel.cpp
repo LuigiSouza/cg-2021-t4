@@ -1,26 +1,5 @@
 #include "Panel.h"
 
-Panel::Panel(float x, float y, float width, float height, bool _fill)
-{
-   coord_x = x;
-   coord_y = y;
-   this->width = width;
-   this->height = height;
-   this->is_fill = _fill;
-   r = g = b = 1;
-}
-
-Panel::~Panel()
-{
-   for (auto it = buttons.begin(); it != buttons.end(); ++it)
-   {
-      Botao *aux = *it;
-      buttons.erase(it);
-      delete aux;
-   }
-   buttons.clear();
-}
-
 void Panel::addButton(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao function, int rgb, int rgb_text, const char *label)
 {
    _x += coord_x;

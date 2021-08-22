@@ -3,6 +3,7 @@
 
 #include "../Handles/Vector3.h"
 
+// Class that stores cam position, vector direction, and angle of cam
 class Cam
 {
 private:
@@ -11,9 +12,11 @@ private:
     Vector3 head;
     Vector3 normal;
 
+    // Distance from camera to plane into perspective projection
     float projection = 200;
 
     float angle;
+    // True if cam type is orthographic
     bool ortho;
 
 public:
@@ -37,6 +40,8 @@ public:
     void set_direction_y(float _y);
     void set_direction_z(float _z);
 
+    // Function that compute head vector based 
+    // on vector direction and rotation angle
     void set_angle(float _angle);
 
     inline Cam(Vector3 _c, Vector3 _d, float _angle, bool _ortho);

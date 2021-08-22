@@ -12,6 +12,7 @@
 #include "../Panel/Botao.h"
 #include "../Panel/Panel.h"
 
+// Main class that controlls size and states of gear and program
 class Interface
 {
 private:
@@ -22,6 +23,7 @@ private:
     Gear *gear;
     Panel *panel;
 
+    // Gear variables
     float radius = 50;
     float tooths_num = 10;
     float size_tooth = 30;
@@ -36,7 +38,7 @@ private:
     float angle_z = 0;
 
     float rotate_speed = 0.01;
-
+    // Cam variables
     bool is_ortho = false;
     bool is_flat = true;
 

@@ -21,8 +21,8 @@ private:
    bool is_fill;
 
 public:
-   Panel(float x, float y, float width, float height, bool _fill);
-   ~Panel();
+   inline Panel(float x, float y, float width, float height, bool _fill);
+   inline ~Panel();
 
    void addButton(float _x, float _y, float _larg, float _alt, bool fill, EnumBotao, int rgb, int rgb_text, const char *label);
 
@@ -57,5 +57,26 @@ public:
       return height;
    }
 };
+
+Panel::Panel(float x, float y, float width, float height, bool _fill)
+{
+   coord_x = x;
+   coord_y = y;
+   this->width = width;
+   this->height = height;
+   this->is_fill = _fill;
+   r = g = b = 1;
+}
+
+Panel::~Panel()
+{
+   for (auto it = buttons.begin(); it != buttons.end(); ++it)
+   {
+      Botao *aux = *it;
+      buttons.erase(it);
+      delete aux;
+   }
+   buttons.clear();
+}
 
 #endif

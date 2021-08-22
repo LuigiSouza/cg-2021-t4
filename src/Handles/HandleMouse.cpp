@@ -3,19 +3,6 @@
 
 #include <iostream>
 
-Mouse::Mouse(void)
-{
-   for (int i = 0; i < 3; i++)
-   {
-      prev_button[i] = false;
-      button[i] = false;
-   }
-}
-
-Mouse::~Mouse(void)
-{
-}
-
 void Mouse::update(void)
 {
    for (int i = 0; i < 3; i++)

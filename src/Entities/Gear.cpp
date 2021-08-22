@@ -94,21 +94,23 @@ void Gear::create_gear(void)
             }
             else
             {
-                Vector2 rad_1 = Vector2(sin(tmp - arc_out) * radius_tooth, cos(tmp - arc_out) * radius_tooth);
-                Vector2 rad_2 = Vector2(sin(tmp + arc_out) * radius_tooth, cos(tmp + arc_out) * radius_tooth);
-                Vector2 rad_out_1 = Vector2(sin(tmp - increment + arc_in) * radius_out, cos(tmp - increment + arc_in) * radius_out);
-                Vector2 rad_out_2 = Vector2(sin(tmp + increment - arc_in) * radius_out, cos(tmp + increment - arc_in) * radius_out);
-                Vector2 vec_1 = rad_out_1 - rad_1;
-                Vector2 vec_2 = rad_out_2 - rad_2;
-                Vector2 perp_1 = Vector2(-vec_1.y, vec_1.x).normalized() * distance_tooths + rad_1;
-                Vector2 perp_2 = Vector2(vec_2.y, -vec_2.x).normalized() * distance_tooths + rad_2;
+                // Finds the center of the intersection of tooth's sides to make a round tooth
+                Vector2 rad_out_1 = Vector2(sin(tmp - arc_out) * radius_tooth, cos(tmp - arc_out) * radius_tooth);
+                Vector2 rad_out_2 = Vector2(sin(tmp + arc_out) * radius_tooth, cos(tmp + arc_out) * radius_tooth);
+                Vector2 rad_1 = Vector2(sin(tmp - increment + arc_in) * radius_out, cos(tmp - increment + arc_in) * radius_out);
+                Vector2 rad_2 = Vector2(sin(tmp + increment - arc_in) * radius_out, cos(tmp + increment - arc_in) * radius_out);
+                Vector2 vec_1 = rad_1 - rad_out_1;
+                Vector2 vec_2 = rad_2 - rad_out_2;
+                Vector2 perp_1 = Vector2(-vec_1.y, vec_1.x).normalized() * distance_tooths + rad_out_1;
+                Vector2 perp_2 = Vector2(vec_2.y, -vec_2.x).normalized() * distance_tooths + rad_out_2;
 
-                Vector2 *intersect = Algebra::intersect_point(perp_1, rad_1, perp_2, rad_2);
+                Vector2 *intersect = Algebra::intersect_point(perp_1, rad_out_1, perp_2, rad_out_2);
+                // If tooth's sides aren't perpendicular, then the intersection is the center
                 if (intersect)
                 {
-                    double distance = Algebra::distance(rad_1, *intersect);
-                    double angle = Algebra::getAngle(rad_2.x, rad_2.y, rad_1.x, rad_1.y, intersect->x, intersect->y);
-                    double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_1.x, rad_1.y, intersect->x, intersect->y);
+                    double distance = Algebra::distance(rad_out_1, *intersect);
+                    double angle = Algebra::getAngle(rad_out_2.x, rad_out_2.y, rad_out_1.x, rad_out_1.y, intersect->x, intersect->y);
+                    double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_out_1.x, rad_out_1.y, intersect->x, intersect->y);
 
                     for (double i = 0; i <= angle; i += angle / DIV_TOOTH)
                     {
@@ -119,10 +121,10 @@ void Gear::create_gear(void)
                 }
                 else
                 {
-                    intersect = new Vector2((rad_1.x + rad_2.x) / 2.0, (rad_1.y + rad_2.y) / 2.0);
-                    double distance = Algebra::distance(rad_1, *intersect);
+                    intersect = new Vector2((rad_out_1.x + rad_out_2.x) / 2.0, (rad_out_1.y + rad_out_2.y) / 2.0);
+                    double distance = Algebra::distance(rad_out_1, *intersect);
                     double angle = PI;
-                    double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_1.x, rad_1.y, intersect->x, intersect->y);
+                    double angle_begin = Algebra::getAngle(intersect->x, intersect->y + 10, rad_out_1.x, rad_out_1.y, intersect->x, intersect->y);
 
                     for (double i = 0; i <= angle; i += angle / DIV_TOOTH)
                     {
@@ -148,6 +150,7 @@ void Gear::create_gear(void)
         vertices->add(Vector3(other_side));
     }
     double div = PI_2 / tooths;
+    // Adds internal circle vertices
     for (double i = 0; i < PI_2 - error; i += div)
     {
         vertices->add(Vector3(sin(i) * radius_in, cos(i) * radius_in, -thickness / 2.0));
@@ -156,6 +159,7 @@ void Gear::create_gear(void)
     {
         vertices->add(Vector3(sin(i) * radius_in, cos(i) * radius_in, thickness / 2.0));
     }
+    // Adds vertices to draw array
     for (int i = 0; i < vertices->get_size(); i++)
         vertices_draw->add(*vertices->get(i));
 }

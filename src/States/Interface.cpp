@@ -7,6 +7,22 @@ void Interface::render(void)
     panel->render();
 }
 
+void Interface::update(void)
+{
+    this->handle_mouse();
+
+    angle_z += rotate_speed;
+    angle_z = angle_z > PI_2 ? angle_z - PI_2 : angle_z;
+    gear->rotate_z(angle_z);
+
+    if (mouse->getCtrl())
+        gear->rotate_x(angle_x);
+    else
+        gear->rotate_y(angle_y);
+
+    gear->matrix_view(*cam);
+}
+
 void Interface::handle_mouse(void)
 {
     Botao *button = panel->buttonClicked(*mouse);
@@ -14,11 +30,13 @@ void Interface::handle_mouse(void)
     {
         if (!button)
         {
-            angle_x += mouse->moveY() / 100.0;
-            angle_y += mouse->moveX() / 100.0;
+            if (mouse->getCtrl())
+                angle_x += mouse->moveY() / 100.0;
+            else
+                angle_y += mouse->moveX() / 100.0;
         }
     }
-    if (mouse->released(0))
+    if (mouse->pushed(0))
     {
         if (button)
         {
@@ -148,84 +166,64 @@ void Interface::handle_mouse(void)
     }
 }
 
-void Interface::update(void)
-{
-    this->handle_mouse();
-
-    angle_z += rotate_speed;
-    angle_z = angle_z > PI_2 ? angle_z - PI_2 : angle_z;
-    gear->rotate_z(angle_z);
-    gear->rotate_x(angle_x);
-    gear->rotate_y(angle_y);
-
-    gear->matrix_view(*cam);
-}
-
 bool Interface::keyboard(int key)
 {
-    // std::cout << "key: " << key << std::endl;
+    std::cout << "key: " << key << std::endl;
 
     switch (key)
     {
     case 97: // a
-        if (direction_x > -0.09)
+        if (direction_x > -0.2)
         {
             direction_x -= 0.005;
             cam->set_direction_x(direction_x);
         }
         break;
     case 100: // d
-        if (direction_x < 0.11)
+        if (direction_x < 0.2)
         {
             direction_x += 0.005;
             cam->set_direction_x(direction_x);
         }
         break;
     case 101: // e
-        if (cam_angle < PI_div_2)
-        {
-            cam_angle += PI / 20;
-            cam->set_angle(cam_angle);
-        }
         break;
     case 102: // f
-        if (direction_y > -0.12)
+        if (direction_y > -0.2)
         {
             direction_y -= 0.005;
             cam->set_direction_y(direction_y);
         }
         break;
     case 113: // q
-        if (cam_angle > -PI_div_2)
-        {
-            cam_angle -= PI / 20;
-            cam->set_angle(cam_angle);
-        }
         break;
     case 114: // r
-        if (direction_y < 0.11)
+        if (direction_y < 0.2)
         {
             direction_y += 0.005;
             cam->set_direction_y(direction_y);
         }
         break;
     case 115: // s
-        if (cam_z < -50)
+        if (cam_z > 0)
         {
-            cam_z += 10;
+            cam_z -= 10;
             cam->set_center_z(cam_z);
         }
         break;
     case 119: // w
-        if (cam_z > -150)
+        if (cam_z < 50)
         {
-            cam_z -= 10;
+            cam_z += 10;
             cam->set_center_z(cam_z);
         }
         break;
     case 120: // x
         break;
     case 122: // z
+        break;
+    case 214: // ctrl
+        mouse->setCtrl(!mouse->getCtrl());
         break;
     case 27: // finaliza programa após clicar duas vezes
         return true;

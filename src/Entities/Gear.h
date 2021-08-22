@@ -14,32 +14,45 @@
 #define DIV_TOOTH 4
 #define DEFAULT_VALUE 10
 
+// Gear class
 class Gear
 {
 private:
     float posx, posy, posz;
 
     int tooths;
-    float radius_in;
-    float radius_out;
     float radius_tooth;
-
-    float size_tooth;
-    float crown_size;
-
-    float size_gear_in;
-    float size_gear_out;
     float thickness;
 
+    // Radius from center to inside circle
+    float radius_in;
+    // Radius from center to outside circle
+    float radius_out;
+
+    float size_tooth;
+    // Size from inside circle to outside circle
+    float crown_size;
+
+    // Distance from one gear to another
+    float size_gear_in;
+    float size_gear_out;
+
+    // Vertices relative to (0,0,0)
     DinamicArray<Vector3> *vertices;
     DinamicArray<Vector3> *vertices_draw;
+    // Number of vertices of one side of gear excluding inside circle
     int num_vertices;
 
-    bool is_flat = false;
+    // Flag to check if it will render based on (0,0,0) coordinates or pre drawn coordinates
     bool rendered = false;
+    bool is_flat = false;
 
 public:
+    // Convert world coordinates to view coordinates
     void matrix_view(Cam cam);
+    // Recreate gear when changes occur
+    void create_gear(void);
+
     void rotate_x(float angle);
     void rotate_y(float angle);
     void rotate_z(float angle);
@@ -54,7 +67,6 @@ public:
     void set_in_gap(float gap);
     void set_out_gap(float gap);
 
-    void create_gear(void);
     void render(void);
 
     inline Gear(Vector3 _pos, float radius, float _crown_size, float tooths_num, float _size_tooth, float thickness, bool flat, float in_gap, float out_gap);
@@ -93,6 +105,7 @@ Gear::Gear(Vector3 _pos, float radius, float _crown_size, float tooths_num, floa
 Gear::~Gear()
 {
     delete vertices;
+    delete vertices_draw;
 }
 
 #endif

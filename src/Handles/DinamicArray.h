@@ -1,6 +1,7 @@
 #ifndef __DINAMIC_ARRAY_H__
 #define __DINAMIC_ARRAY_H__
 
+// Dinamic array of type T that allocates more space when is full
 template <class T>
 class DinamicArray
 {
@@ -20,7 +21,7 @@ public:
     int get_limit(void);
 
     DinamicArray(int size);
-    ~DinamicArray(void);
+    ~DinamicArray();
 };
 
 template <class T>
@@ -79,7 +80,7 @@ DinamicArray<T>::DinamicArray(int size)
 }
 
 template <class T>
-DinamicArray<T>::~DinamicArray(void)
+DinamicArray<T>::~DinamicArray()
 {
     delete array;
 }

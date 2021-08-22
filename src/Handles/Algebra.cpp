@@ -72,6 +72,9 @@ Vector2 Algebra::quadratic_bezier(Vector2 p0, Vector2 p1, Vector2 p2, double t)
    return p0 * ((1 - t) * (1 - t)) + p1 * (2 * (1 - t) * t) + p2 * t * t;
 }
 
+/*
+    *  Based on an algorithm in Andre LeMothe's "Tricks of the Windows Game Programming Gurus"
+   */
 Vector2 *Algebra::intersect_point(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
 {
    Vector2 s1 = p1 - p0;

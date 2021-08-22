@@ -17,8 +17,8 @@ private:
     bool ctrl = false;
 
 public:
-    Mouse(void);
-    ~Mouse(void);
+    inline Mouse(void);
+    inline ~Mouse();
 
     // get states
     bool isDown(int index);
@@ -42,5 +42,18 @@ public:
     void setCtrl(bool ctrl);
     bool getCtrl(void);
 };
+
+Mouse::Mouse(void)
+{
+   for (int i = 0; i < 3; i++)
+   {
+      prev_button[i] = false;
+      button[i] = false;
+   }
+}
+
+Mouse::~Mouse()
+{
+}
 
 #endif
