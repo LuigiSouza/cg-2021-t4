@@ -87,7 +87,7 @@ As outas duas opções isoladas, alteram respectivamente:
 - Estilo da visualização, entre ortográfica e perspectiva
 - Estilo do dente da engrenagem, entre lado plano e curvado
 
-O nome do botão será referente ao estilo da câmera ou engrenagem escolhido. Para alterar entre um valor e outro, basta pressionar o botão novamente.
+O nome do botão será referente ao estilo da câmera ou engrenagem escolhida. Para alterar entre um valor e outro, basta pressionar o botão novamente.
 
 # Exemplo
 
