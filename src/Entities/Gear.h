@@ -33,7 +33,7 @@ private:
     // Size from inside circle to outside circle
     float crown_size;
 
-    // Distance from one gear to another
+    // Distance from one tooth to another
     float size_gear_in;
     float size_gear_out;
 

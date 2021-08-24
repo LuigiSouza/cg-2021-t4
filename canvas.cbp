@@ -63,8 +63,8 @@
 		<Unit filename="src/Panel/EnumBotao.h" />
 		<Unit filename="src/Panel/Panel.cpp" />
 		<Unit filename="src/Panel/Panel.h" />
-		<Unit filename="src/States/Interface.cpp" />
-		<Unit filename="src/States/Interface.h" />
+		<Unit filename="src/Interface/Interface.cpp" />
+		<Unit filename="src/Interface/Interface.h" />
 		<Unit filename="src/gl_canvas2d.cpp" />
 		<Unit filename="src/gl_canvas2d.h" />
 		<Unit filename="src/main.cpp" />
