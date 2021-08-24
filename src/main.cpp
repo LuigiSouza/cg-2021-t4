@@ -32,6 +32,7 @@
 - Edição livre de todos os parâmetros utilizados na engrenagem
 - Interface para edição da engrenagem
 - Rotação em diferentes ângulos com o mouse
+- Sistema de FPS
 
 ************************************************************************/
 
@@ -45,19 +46,19 @@
 
 #include "gl_canvas2d.h"
 
-#include "Entities/Gear.h"
 #include "Entities/Cam.h"
-#include "States/Interface.h"
-
 #include "Handles/HandleMouse.h"
-#include "Handles/Algebra.h"
-#include "Handles/Vector2.h"
-#include "Handles/Vector3.h"
+
+#include "Interface/Interface.h"
+#include "Interface/Frames.h"
 
 int screenWidth = 1024, screenHeight = 768;
 
 Mouse *mouse_state;
 Interface *interface;
+
+// Fps variables
+Frames *fps;
 
 /***********************************************************
 *
@@ -69,6 +70,7 @@ void dispose()
 {
    delete interface;
    delete mouse_state;
+   delete fps;
    exit(0);
 }
 
@@ -99,6 +101,8 @@ void render()
    update();
 
    interface->render();
+
+   fps->render();
 }
 
 //funcao chamada toda vez que uma tecla for pressionada
@@ -131,6 +135,7 @@ int main(void)
 
    mouse_state = new Mouse();
    interface = new Interface(&screenWidth, &screenHeight, mouse_state);
+   fps = new Frames(10, screenHeight - 20);
 
    CV::run();
 }
