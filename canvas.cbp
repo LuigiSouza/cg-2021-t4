@@ -58,13 +58,14 @@
 		<Unit filename="src/Handles/HandleMouse.h" />
 		<Unit filename="src/Handles/Vector2.h" />
 		<Unit filename="src/Handles/Vector3.h" />
+		<Unit filename="src/Interface/Frames.h" />
+		<Unit filename="src/Interface/Interface.cpp" />
+		<Unit filename="src/Interface/Interface.h" />
 		<Unit filename="src/Panel/Botao.cpp" />
 		<Unit filename="src/Panel/Botao.h" />
 		<Unit filename="src/Panel/EnumBotao.h" />
 		<Unit filename="src/Panel/Panel.cpp" />
 		<Unit filename="src/Panel/Panel.h" />
-		<Unit filename="src/Interface/Interface.cpp" />
-		<Unit filename="src/Interface/Interface.h" />
 		<Unit filename="src/gl_canvas2d.cpp" />
 		<Unit filename="src/gl_canvas2d.h" />
 		<Unit filename="src/main.cpp" />
