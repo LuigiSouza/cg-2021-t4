@@ -82,7 +82,7 @@ DinamicArray<T>::DinamicArray(int size)
 template <class T>
 DinamicArray<T>::~DinamicArray()
 {
-    delete array;
+    delete[] array;
 }
 
 #endif

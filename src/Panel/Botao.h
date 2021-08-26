@@ -62,7 +62,7 @@ public:
     this->r = rgb[0];
     this->g = rgb[1];
     this->b = rgb[2];
-    delete rgb;
+    delete[] rgb;
   }
 
   void set_color_text(int i)
@@ -71,7 +71,7 @@ public:
     this->text_r = rgb[0];
     this->text_g = rgb[1];
     this->text_b = rgb[2];
-    delete rgb;
+    delete[] rgb;
   }
 };
 
